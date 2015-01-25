@@ -1,0 +1,18 @@
+# SDK
+ext
+
+# Architect
+.architect
+.sencha
+
+# Build
+build
+
+# Sass
+.sass-cache/
+.sencha_backup/
+
+# MISC
+.idea/
+.DS_Store
+.ant-cache

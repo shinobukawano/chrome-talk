@@ -1,0 +1,31 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": true,
+        "designer|userClassName": "Histories",
+        "model": "History",
+        "storeId": "Histories"
+    },
+    "name": "MyStore",
+    "designerId": "6a3a3ae2-8d81-405f-bcdb-1ce4d067db66",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.LocalStorage",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "id": "chat-histories"
+            },
+            "name": "MyLocalStorageProxy",
+            "designerId": "fda242a6-ac20-47dc-af29-c41399e4a769"
+        }
+    ]
+}

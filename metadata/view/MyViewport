@@ -1,0 +1,196 @@
+{
+    "type": "Ext.container.Viewport",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "myviewport",
+        "designer|userClassName": "MyViewport",
+        "layout": "fit"
+    },
+    "name": "MyViewport",
+    "designerId": "1afdc88d-9f7d-44db-84e0-0408af85b01c",
+    "viewControllerInstanceId": "7fd7b632-1a49-4eab-b690-e17c54d6eb6d",
+    "viewModelInstanceId": "aa247c2d-bada-4c4c-807c-f0e756172c21",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "border",
+                "title": "CHROME TALK <i class=\"fa fa-comments\"></i>"
+            },
+            "name": "MyPanel",
+            "designerId": "9e2dc4d9-df11-4efa-98eb-a823364898e5",
+            "cn": [
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "cls": [
+                            "display-panel"
+                        ],
+                        "id": "displayPanel",
+                        "layout|flex": 1,
+                        "layout|region": "center"
+                    },
+                    "name": "MyPanel1",
+                    "designerId": "a9ba3a10-a499-48b6-b9ed-788ac801edeb"
+                },
+                {
+                    "type": "Ext.form.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 150,
+                        "layout|flex": 1,
+                        "layout|region": "south",
+                        "layout|split": true,
+                        "padding": null
+                    },
+                    "name": "MyForm",
+                    "designerId": "1f598e1e-35ab-4f32-8ff0-c41419a9a1ed",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "emptyText": "example@gmail.com",
+                                "fieldLabel": "<i class=\"fa fa-search\"></i> Google Account",
+                                "labelWidth": 150,
+                                "layout|anchor": "100%",
+                                "margin": "10em"
+                            },
+                            "name": "MyTextField",
+                            "designerId": "2277a7af-81e5-4742-918b-48b0b2341061"
+                        },
+                        {
+                            "type": "Ext.container.Container",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|align": "stretch",
+                                "container|pack": "end",
+                                "layout": "hbox"
+                            },
+                            "name": "MyContainer",
+                            "designerId": "b82c33ee-a9d4-492f-8d60-42727652a6c7",
+                            "cn": [
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "connectButton",
+                                        "margin": "0 10em 10em",
+                                        "text": "<i class=\"fa fa-video-camera\"></i> CONNECT"
+                                    },
+                                    "name": "MyButton",
+                                    "designerId": "fd5549ef-0a72-4798-b68c-0f82ff300892"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.FieldSet",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "margin": "10em",
+                                "maxHeight": null,
+                                "minHeight": 100,
+                                "padding": null,
+                                "title": "<i class=\"fa fa-list-alt\"></i> CONTACTS"
+                            },
+                            "name": "MyFieldSet",
+                            "designerId": "8ec25eb6-1472-4ee6-b3b5-1a90057ce929",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "hideHeaders": true,
+                                        "margin": "10em",
+                                        "minHeight": 100,
+                                        "padding": null,
+                                        "store": "Histories",
+                                        "title": ""
+                                    },
+                                    "name": "MyGridPanel",
+                                    "designerId": "9ba524d7-e7f6-4733-81e9-963cbddbd736",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.grid.column.Column",
+                                            "reference": {
+                                                "name": "columns",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "dataIndex": "address",
+                                                "flex": 1,
+                                                "text": "String"
+                                            },
+                                            "name": "MyColumn",
+                                            "designerId": "4ad80ed6-9837-4288-83a1-30529a8999bb"
+                                        },
+                                        {
+                                            "type": "Ext.view.Table",
+                                            "reference": {
+                                                "name": "viewConfig",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "name": "MyTable",
+                                            "designerId": "4f2ba712-ea11-47bb-9042-9adced8422f8"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.panel.Tool",
+                    "reference": {
+                        "name": "tools",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "name": "MyTool",
+                    "designerId": "aeffd4ba-f77d-4896-9255-a9c8d9b8abf4"
+                }
+            ]
+        }
+    ]
+}
