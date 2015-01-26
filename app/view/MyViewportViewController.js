@@ -15,5 +15,31 @@
 
 Ext.define('CT.view.MyViewportViewController', {
     extend: 'Ext.app.ViewController',
-    alias: 'controller.myviewport'
+    alias: 'controller.myviewport',
+
+    onConnectButtonClick: function(button, e, eOpts) {
+        var field = this.lookupReference('accountField'),
+            value = field.getValue();
+
+        if (!field.isValid()) {
+            Ext.Msg.alert(CT.Consts.APP_TITLE,
+            'The account value seems invalid. <br>' +
+            'Please confirm it.');
+        }
+
+
+
+    },
+
+    onViewportAfterRender: function(component, eOpts) {
+
+        var record = Ext.create('CT.model.Contact');
+
+        var viewModel = this.getViewModel();
+        viewModel.setData({
+            contact: record
+        });
+
+    }
+
 });

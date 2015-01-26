@@ -20,11 +20,15 @@ Ext.Loader.setConfig({
 
 
 Ext.application({
+
+    requires: [
+        'CT.util.Consts'
+    ],
     models: [
-        'History'
+        'Contact'
     ],
     stores: [
-        'Histories'
+        'Contacts'
     ],
     views: [
         'MyViewport'

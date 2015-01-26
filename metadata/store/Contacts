@@ -7,9 +7,9 @@
     "codeClass": null,
     "userConfig": {
         "autoLoad": true,
-        "designer|userClassName": "Histories",
-        "model": "History",
-        "storeId": "Histories"
+        "designer|userClassName": "Contacts",
+        "model": "Contact",
+        "storeId": "Contacts"
     },
     "name": "MyStore",
     "designerId": "6a3a3ae2-8d81-405f-bcdb-1ce4d067db66",

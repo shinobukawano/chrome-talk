@@ -7,11 +7,14 @@
     "codeClass": null,
     "userConfig": {
         "models": [
-            "History"
+            "Contact"
         ],
         "name": "CT",
+        "requires": [
+            "CT.util.Consts"
+        ],
         "stores": [
-            "Histories"
+            "Contacts"
         ],
         "views": [
             "MyViewport"

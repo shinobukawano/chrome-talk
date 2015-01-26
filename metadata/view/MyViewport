@@ -57,6 +57,7 @@
                     "codeClass": null,
                     "userConfig": {
                         "height": 150,
+                        "id": "contactPanel",
                         "layout|flex": 1,
                         "layout|region": "south",
                         "layout|split": true,
@@ -75,11 +76,19 @@
                             "userConfig": {
                                 "emptyText": "example@gmail.com",
                                 "fieldLabel": "<i class=\"fa fa-search\"></i> Google Account",
-                                "labelWidth": 150,
+                                "labelWidth": 135,
                                 "layout|anchor": "100%",
-                                "margin": "10em"
+                                "margin": "10em",
+                                "reference": "accountField",
+                                "value": [
+                                    "{contact.address}"
+                                ],
+                                "vtype": null
                             },
                             "name": "MyTextField",
+                            "configAlternates": {
+                                "value": "binding"
+                            },
                             "designerId": "2277a7af-81e5-4742-918b-48b0b2341061"
                         },
                         {
@@ -105,12 +114,48 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
+                                        "disabled": [
+                                            "{!contact.address}"
+                                        ],
                                         "id": "connectButton",
                                         "margin": "0 10em 10em",
                                         "text": "<i class=\"fa fa-video-camera\"></i> CONNECT"
                                     },
                                     "name": "MyButton",
-                                    "designerId": "fd5549ef-0a72-4798-b68c-0f82ff300892"
+                                    "configAlternates": {
+                                        "disabled": "binding"
+                                    },
+                                    "designerId": "fd5549ef-0a72-4798-b68c-0f82ff300892",
+                                    "cn": [
+                                        {
+                                            "type": "viewcontrollereventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onConnectButtonClick",
+                                                "implHandler": [
+                                                    "var field = this.lookupReference('accountField'),",
+                                                    "    value = field.getValue();",
+                                                    "",
+                                                    "if (!field.isValid()) {",
+                                                    "    Ext.Msg.alert(CT.Consts.APP_TITLE,",
+                                                    "                  'The account value seems invalid. <br>' + ",
+                                                    "                  'Please confirm it.');",
+                                                    "}",
+                                                    "",
+                                                    "",
+                                                    ""
+                                                ],
+                                                "name": "click",
+                                                "scope": "me"
+                                            },
+                                            "name": "onConnectButtonClick",
+                                            "designerId": "a32595cb-885a-4686-8077-f0337f2a09ed"
+                                        }
+                                    ]
                                 }
                             ]
                         },
@@ -143,7 +188,7 @@
                                         "margin": "10em",
                                         "minHeight": 100,
                                         "padding": null,
-                                        "store": "Histories",
+                                        "store": "Contacts",
                                         "title": ""
                                     },
                                     "name": "MyGridPanel",
@@ -191,6 +236,31 @@
                     "designerId": "aeffd4ba-f77d-4896-9255-a9c8d9b8abf4"
                 }
             ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onViewportAfterRender",
+                "implHandler": [
+                    "",
+                    "var record = Ext.create('CT.model.Contact');",
+                    "",
+                    "var viewModel = this.getViewModel();",
+                    "viewModel.setData({",
+                    "    contact: record",
+                    "});",
+                    ""
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onViewportAfterRender",
+            "designerId": "bd36d060-b1f8-4f0a-92b1-90ac1a2f114c"
         }
     ]
 }

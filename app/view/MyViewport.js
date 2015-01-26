@@ -19,6 +19,7 @@ Ext.define('CT.view.MyViewport', {
 
     requires: [
         'CT.view.MyViewportViewModel',
+        'CT.view.MyViewportViewController',
         'Ext.form.Panel',
         'Ext.form.field.Text',
         'Ext.button.Button',
@@ -29,6 +30,7 @@ Ext.define('CT.view.MyViewport', {
         'Ext.panel.Tool'
     ],
 
+    controller: 'myviewport',
     viewModel: {
         type: 'myviewport'
     },
@@ -53,14 +55,19 @@ Ext.define('CT.view.MyViewport', {
                     region: 'south',
                     split: true,
                     height: 150,
+                    id: 'contactPanel',
                     items: [
                         {
                             xtype: 'textfield',
                             anchor: '100%',
+                            reference: 'accountField',
                             margin: '10em',
                             fieldLabel: '<i class="fa fa-search"></i> Google Account',
-                            labelWidth: 150,
-                            emptyText: 'example@gmail.com'
+                            labelWidth: 135,
+                            emptyText: 'example@gmail.com',
+                            bind: {
+                                value: '{contact.address}'
+                            }
                         },
                         {
                             xtype: 'container',
@@ -74,7 +81,13 @@ Ext.define('CT.view.MyViewport', {
                                     xtype: 'button',
                                     id: 'connectButton',
                                     margin: '0 10em 10em',
-                                    text: '<i class="fa fa-video-camera"></i> CONNECT'
+                                    text: '<i class="fa fa-video-camera"></i> CONNECT',
+                                    bind: {
+                                        disabled: '{!contact.address}'
+                                    },
+                                    listeners: {
+                                        click: 'onConnectButtonClick'
+                                    }
                                 }
                             ]
                         },
@@ -90,7 +103,7 @@ Ext.define('CT.view.MyViewport', {
                                     minHeight: 100,
                                     title: '',
                                     hideHeaders: true,
-                                    store: 'Histories',
+                                    store: 'Contacts',
                                     columns: [
                                         {
                                             xtype: 'gridcolumn',
@@ -111,6 +124,9 @@ Ext.define('CT.view.MyViewport', {
                 }
             ]
         }
-    ]
+    ],
+    listeners: {
+        afterrender: 'onViewportAfterRender'
+    }
 
 });
