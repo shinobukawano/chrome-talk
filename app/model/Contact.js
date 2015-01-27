@@ -20,6 +20,12 @@ Ext.define('CT.model.Contact', {
         'Ext.data.field.Field'
     ],
 
+    validators: {
+        address: {
+            type: 'email'
+        }
+    },
+
     fields: [
         {
             name: 'id'

@@ -18,15 +18,15 @@ Ext.define('CT.view.MyViewportViewController', {
     alias: 'controller.myviewport',
 
     onConnectButtonClick: function(button, e, eOpts) {
-        var field = this.lookupReference('accountField'),
-            value = field.getValue();
+        var contact = this.getViewModel().get('contact');
 
-        if (!field.isValid()) {
+        var result = contact.validate();
+
+        if (result.length > 0) {
             Ext.Msg.alert(CT.Consts.APP_TITLE,
-            'The account value seems invalid. <br>' +
+            'The e-mail address seems invalid. <br>' +
             'Please confirm it.');
         }
-
 
 
     },
