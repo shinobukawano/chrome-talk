@@ -20,6 +20,7 @@ Ext.define('CT.view.MyViewport', {
     requires: [
         'CT.view.MyViewportViewModel',
         'CT.view.MyViewportViewController',
+        'CT.view.WebRTC',
         'Ext.form.Panel',
         'Ext.form.field.Text',
         'Ext.button.Button',
@@ -47,7 +48,13 @@ Ext.define('CT.view.MyViewport', {
                     flex: 1,
                     region: 'center',
                     cls: 'display-panel',
-                    id: 'displayPanel'
+                    id: 'displayPanel',
+                    layout: 'fit',
+                    items: [
+                        {
+                            xtype: 'webrtc'
+                        }
+                    ]
                 },
                 {
                     xtype: 'form',

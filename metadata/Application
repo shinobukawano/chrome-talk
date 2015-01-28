@@ -17,7 +17,8 @@
             "Contacts"
         ],
         "views": [
-            "MyViewport"
+            "MyViewport",
+            "WebRTC"
         ]
     },
     "name": "Application",

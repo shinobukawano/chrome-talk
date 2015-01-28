@@ -1,0 +1,13 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "webrtc",
+        "designer|userClassName": "WebRTCViewController"
+    },
+    "designerId": "a9533fbe-1ab1-482d-be3b-6d42189ea6bb"
+}

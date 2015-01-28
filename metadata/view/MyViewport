@@ -41,12 +41,27 @@
                         "cls": [
                             "display-panel"
                         ],
+                        "html": null,
                         "id": "displayPanel",
+                        "layout": "fit",
                         "layout|flex": 1,
                         "layout|region": "center"
                     },
                     "name": "MyPanel1",
-                    "designerId": "a9ba3a10-a499-48b6-b9ed-788ac801edeb"
+                    "designerId": "a9ba3a10-a499-48b6-b9ed-788ac801edeb",
+                    "cn": [
+                        {
+                            "type": "linkedinstance",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "name": "webrtc",
+                            "designerId": "630c5ea5-3aa5-436e-bcf3-8cd29e09fff7",
+                            "masterInstanceId": "c1727287-2f5c-4924-bf6b-98763ec6e72c"
+                        }
+                    ]
                 },
                 {
                     "type": "Ext.form.Panel",

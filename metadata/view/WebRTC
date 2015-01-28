@@ -1,0 +1,119 @@
+{
+    "type": "Ext.Component",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "webrtc",
+        "designer|userClassName": "WebRTC",
+        "html": [
+            "<video style=\"height:100%\"></video>"
+        ],
+        "id": "video",
+        "useAudio": true,
+        "useVideo": true,
+        "width": 150
+    },
+    "name": "MyComponent",
+    "configAlternates": {
+        "useVideo": "boolean",
+        "useAudio": "boolean"
+    },
+    "designerId": "c1727287-2f5c-4924-bf6b-98763ec6e72c",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "useVideo",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "useAudio",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "a9533fbe-1ab1-482d-be3b-6d42189ea6bb",
+    "viewModelInstanceId": "daf9cb3b-fd27-452f-a605-97459e016b72",
+    "cn": [
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "stream"
+                ],
+                "fn": "onGetUserMedia",
+                "implHandler": [
+                    "var me = this,",
+                    "    video = me.el.down('video').dom;",
+                    "",
+                    "video.src = URL.createObjectURL(stream);",
+                    "",
+                    "setTimeout(function() {",
+                    "    video.play();",
+                    "});",
+                    ""
+                ]
+            },
+            "name": "onGetUserMedia",
+            "designerId": "40eb7a64-328f-4844-a646-694a3b7447bf"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "error"
+                ],
+                "fn": "onFailureGetUserMedia",
+                "implHandler": [
+                    "Ext.Msg.alert('error');"
+                ]
+            },
+            "name": "onFailureGetUserMedia",
+            "designerId": "b999eb77-7504-4efe-acd7-a714969bd0ee"
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAfterRender",
+                "implHandler": [
+                    "var me = this;",
+                    "",
+                    "var successFn = Ext.bind(me.onGetUserMedia, me);",
+                    "var failureFn = Ext.bind(me.onFailureGetUserMedia, me);",
+                    "",
+                    "if (Ext.isEmpty(navigator.webkitGetUserMedia)) {",
+                    "    failureFn();",
+                    "    return;",
+                    "}",
+                    "",
+                    "navigator.webkitGetUserMedia({",
+                    "    video: me.getUseVideo(),",
+                    "    audio: me.getUseAudio()",
+                    "}, successFn, failureFn);",
+                    ""
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onAfterRender",
+            "designerId": "1fd94e75-f7a3-452e-ada8-c65c69bee244"
+        }
+    ]
+}
