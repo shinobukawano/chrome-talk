@@ -26,8 +26,34 @@ Ext.define('CT.view.MyViewportViewController', {
             Ext.Msg.alert(CT.Consts.APP_TITLE,
             'The e-mail address seems invalid. <br>' +
             'Please confirm it.');
+            return;
         }
 
+        var contacts = this.getStore('Contacts');
+        contacts.add(contact);
+        contacts.sync();
+
+    },
+
+    onDeleteButtonClick: function(view, rowIndex, colIndex, item, e, record, row) {
+        var me = this;
+
+        Ext.Msg.confirm(CT.Consts.APP_TITLE,
+        'Do you want to remove this contact?',
+        function(btn) {
+            if (btn === 'yes') {
+                var contacts = me.getStore('Contacts');
+                contacts.remove(record);
+                contacts.sync();
+            }
+        });
+    },
+
+    onGridpanelItemClick: function(dataview, record, item, index, e, eOpts) {
+        var viewModel = this.getViewModel();
+        viewModel.setData({
+            contact: record
+        });
 
     },
 

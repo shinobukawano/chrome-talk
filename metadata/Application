@@ -13,9 +13,6 @@
         "requires": [
             "CT.util.Consts"
         ],
-        "stores": [
-            "Contacts"
-        ],
         "views": [
             "MyViewport",
             "WebRTC"

@@ -15,6 +15,22 @@
 
 Ext.define('CT.view.MyViewportViewModel', {
     extend: 'Ext.app.ViewModel',
-    alias: 'viewmodel.myviewport'
+    alias: 'viewmodel.myviewport',
+
+    requires: [
+        'Ext.data.Store',
+        'Ext.data.proxy.LocalStorage'
+    ],
+
+    stores: {
+        Contacts: {
+            autoLoad: true,
+            model: 'CT.model.Contact',
+            proxy: {
+                type: 'localstorage',
+                id: 'chat-contacts'
+            }
+        }
+    }
 
 });

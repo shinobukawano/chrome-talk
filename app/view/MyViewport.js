@@ -26,7 +26,7 @@ Ext.define('CT.view.MyViewport', {
         'Ext.button.Button',
         'Ext.form.FieldSet',
         'Ext.grid.Panel',
-        'Ext.grid.column.Column',
+        'Ext.grid.column.Action',
         'Ext.view.Table',
         'Ext.panel.Tool'
     ],
@@ -106,19 +106,34 @@ Ext.define('CT.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'gridpanel',
-                                    margin: '10em',
+                                    margin: '10em 0',
                                     minHeight: 100,
                                     title: '',
                                     hideHeaders: true,
-                                    store: 'Contacts',
+                                    bind: {
+                                        store: '{Contacts}'
+                                    },
                                     columns: [
                                         {
                                             xtype: 'gridcolumn',
                                             dataIndex: 'address',
                                             text: 'String',
                                             flex: 1
+                                        },
+                                        {
+                                            xtype: 'actioncolumn',
+                                            width: 30,
+                                            items: [
+                                                {
+                                                    handler: 'onDeleteButtonClick',
+                                                    icon: 'resources/icons/delete.png'
+                                                }
+                                            ]
                                         }
-                                    ]
+                                    ],
+                                    listeners: {
+                                        itemclick: 'onGridpanelItemClick'
+                                    }
                                 }
                             ]
                         }

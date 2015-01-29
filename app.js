@@ -27,9 +27,6 @@ Ext.application({
     models: [
         'Contact'
     ],
-    stores: [
-        'Contacts'
-    ],
     views: [
         'MyViewport',
         'WebRTC'

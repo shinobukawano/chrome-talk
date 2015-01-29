@@ -160,8 +160,12 @@
                                                     "    Ext.Msg.alert(CT.Consts.APP_TITLE,",
                                                     "                  'The e-mail address seems invalid. <br>' +",
                                                     "                  'Please confirm it.');",
+                                                    "    return;",
                                                     "}",
                                                     "",
+                                                    "var contacts = this.getStore('Contacts');",
+                                                    "contacts.add(contact);",
+                                                    "contacts.sync();",
                                                     ""
                                                 ],
                                                 "name": "click",
@@ -200,13 +204,18 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "hideHeaders": true,
-                                        "margin": "10em",
+                                        "margin": "10em 0",
                                         "minHeight": 100,
                                         "padding": null,
-                                        "store": "Contacts",
+                                        "store": [
+                                            "{Contacts}"
+                                        ],
                                         "title": ""
                                     },
                                     "name": "MyGridPanel",
+                                    "configAlternates": {
+                                        "store": "binding"
+                                    },
                                     "designerId": "9ba524d7-e7f6-4733-81e9-963cbddbd736",
                                     "cn": [
                                         {
@@ -225,6 +234,75 @@
                                             "designerId": "4ad80ed6-9837-4288-83a1-30529a8999bb"
                                         },
                                         {
+                                            "type": "Ext.grid.column.Action",
+                                            "reference": {
+                                                "name": "columns",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "html": null,
+                                                "iconCls": null,
+                                                "width": 30
+                                            },
+                                            "name": "MyActionColumn",
+                                            "designerId": "e3b82cd6-9991-4f83-9675-142f31ed02a0",
+                                            "cn": [
+                                                {
+                                                    "type": "actioncolumnitem",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "icon": "resources/icons/delete.png",
+                                                        "iconCls": null
+                                                    },
+                                                    "name": "MyActionColumnItem",
+                                                    "designerId": "dccc2d18-5047-459b-8cb1-9e7ba444cadc",
+                                                    "cn": [
+                                                        {
+                                                            "type": "fixedfunction",
+                                                            "reference": {
+                                                                "name": "items",
+                                                                "type": "array"
+                                                            },
+                                                            "codeClass": null,
+                                                            "userConfig": {
+                                                                "designer|params": [
+                                                                    "view",
+                                                                    "rowIndex",
+                                                                    "colIndex",
+                                                                    "item",
+                                                                    "e",
+                                                                    "record",
+                                                                    "row"
+                                                                ],
+                                                                "designer|viewControllerFn": "onDeleteButtonClick",
+                                                                "fn": "handler",
+                                                                "implHandler": [
+                                                                    "var me = this;",
+                                                                    "",
+                                                                    "Ext.Msg.confirm(CT.Consts.APP_TITLE,",
+                                                                    "                'Do you want to remove this contact?',",
+                                                                    "                function(btn) {",
+                                                                    "                    if (btn === 'yes') {",
+                                                                    "                        var contacts = me.getStore('Contacts');",
+                                                                    "                        contacts.remove(record);",
+                                                                    "                        contacts.sync();",
+                                                                    "                    }",
+                                                                    "                });"
+                                                                ]
+                                                            },
+                                                            "name": "handler",
+                                                            "designerId": "19a7b490-dac4-4c0b-8348-4c0ce85ef49c"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
                                             "type": "Ext.view.Table",
                                             "reference": {
                                                 "name": "viewConfig",
@@ -233,6 +311,28 @@
                                             "codeClass": null,
                                             "name": "MyTable",
                                             "designerId": "4f2ba712-ea11-47bb-9042-9adced8422f8"
+                                        },
+                                        {
+                                            "type": "viewcontrollereventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onGridpanelItemClick",
+                                                "implHandler": [
+                                                    "var viewModel = this.getViewModel();",
+                                                    "viewModel.setData({",
+                                                    "    contact: record",
+                                                    "});",
+                                                    ""
+                                                ],
+                                                "name": "itemclick",
+                                                "scope": "me"
+                                            },
+                                            "name": "onGridpanelItemClick",
+                                            "designerId": "a99ed349-c6e4-4ec5-8310-b6d425535cf2"
                                         }
                                     ]
                                 }
