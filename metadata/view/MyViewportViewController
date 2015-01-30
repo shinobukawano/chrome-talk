@@ -9,5 +9,80 @@
         "designer|userAlias": "myviewport",
         "designer|userClassName": "MyViewportViewController"
     },
-    "designerId": "7fd7b632-1a49-4eab-b690-e17c54d6eb6d"
+    "designerId": "7fd7b632-1a49-4eab-b690-e17c54d6eb6d",
+    "cn": [
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "connect",
+                "implHandler": [
+                    "var contact = this.getViewModel().get('contact');",
+                    "",
+                    "var result = contact.validate();",
+                    "",
+                    "if (result.length > 0) {",
+                    "    Ext.Msg.alert(CT.Consts.APP_TITLE,",
+                    "                  'The e-mail address seems invalid. <br>' +",
+                    "                  'Please confirm it.');",
+                    "    return;",
+                    "}",
+                    "",
+                    "var contacts = this.getStore('Contacts');",
+                    "contacts.add(contact);",
+                    "contacts.sync();",
+                    "",
+                    "var panel = this.lookupReference('displayPanel');",
+                    "panel.getEl().mask('Connecting..');",
+                    "",
+                    "var button = this.lookupReference('connectButton');",
+                    "button.setText(CT.Consts.BUTTON_DISCONNECT_TEXT);",
+                    ""
+                ]
+            },
+            "name": "connect",
+            "designerId": "c7cc39e3-9dc3-4d77-8b99-86df92729157"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "disconnect",
+                "implHandler": [
+                    "var panel = this.lookupReference('displayPanel');",
+                    "panel.getEl().unmask();",
+                    "",
+                    "var button = this.lookupReference('connectButton');",
+                    "button.setText(CT.Consts.BUTTON_CONNECT_TEXT);"
+                ]
+            },
+            "name": "disconnect",
+            "designerId": "95ab5ce2-1f5e-4b66-aae5-d48b375f7457"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "isConnecting",
+                "implHandler": [
+                    "var button = this.lookupReference('connectButton');",
+                    "return button.getText() === CT.Consts.BUTTON_DISCONNECT_TEXT;"
+                ]
+            },
+            "name": "isConnecting",
+            "designerId": "1137e74f-84a8-4e0c-bbe8-d472b8352df3"
+        }
+    ]
 }

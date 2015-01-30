@@ -42,10 +42,11 @@
                             "display-panel"
                         ],
                         "html": null,
-                        "id": "displayPanel",
+                        "id": null,
                         "layout": "fit",
                         "layout|flex": 1,
-                        "layout|region": "center"
+                        "layout|region": "center",
+                        "reference": "displayPanel"
                     },
                     "name": "MyPanel1",
                     "designerId": "a9ba3a10-a499-48b6-b9ed-788ac801edeb",
@@ -132,8 +133,9 @@
                                         "disabled": [
                                             "{!contact.address}"
                                         ],
-                                        "id": "connectButton",
+                                        "id": null,
                                         "margin": "0 10em 10em",
+                                        "reference": "connectButton",
                                         "text": "<i class=\"fa fa-video-camera\"></i> CONNECT"
                                     },
                                     "name": "MyButton",
@@ -152,20 +154,14 @@
                                             "userConfig": {
                                                 "fn": "onConnectButtonClick",
                                                 "implHandler": [
-                                                    "var contact = this.getViewModel().get('contact');",
+                                                    "var me = this;",
                                                     "",
-                                                    "var result = contact.validate();",
-                                                    "",
-                                                    "if (result.length > 0) {",
-                                                    "    Ext.Msg.alert(CT.Consts.APP_TITLE,",
-                                                    "                  'The e-mail address seems invalid. <br>' +",
-                                                    "                  'Please confirm it.');",
-                                                    "    return;",
+                                                    "if (me.isConnecting()) {",
+                                                    "    me.disconnect();",
                                                     "}",
-                                                    "",
-                                                    "var contacts = this.getStore('Contacts');",
-                                                    "contacts.add(contact);",
-                                                    "contacts.sync();",
+                                                    "else {",
+                                                    "    me.connect();",
+                                                    "}",
                                                     ""
                                                 ],
                                                 "name": "click",

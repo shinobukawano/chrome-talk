@@ -47,8 +47,8 @@ Ext.define('CT.view.MyViewport', {
                     xtype: 'panel',
                     flex: 1,
                     region: 'center',
+                    reference: 'displayPanel',
                     cls: 'display-panel',
-                    id: 'displayPanel',
                     layout: 'fit',
                     items: [
                         {
@@ -86,7 +86,7 @@ Ext.define('CT.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'button',
-                                    id: 'connectButton',
+                                    reference: 'connectButton',
                                     margin: '0 10em 10em',
                                     text: '<i class="fa fa-video-camera"></i> CONNECT',
                                     bind: {

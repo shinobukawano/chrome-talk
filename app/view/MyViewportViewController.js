@@ -17,21 +17,52 @@ Ext.define('CT.view.MyViewportViewController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.myviewport',
 
-    onConnectButtonClick: function(button, e, eOpts) {
+    connect: function() {
         var contact = this.getViewModel().get('contact');
 
         var result = contact.validate();
 
         if (result.length > 0) {
             Ext.Msg.alert(CT.Consts.APP_TITLE,
-            'The e-mail address seems invalid. <br>' +
-            'Please confirm it.');
+                          'The e-mail address seems invalid. <br>' +
+                          'Please confirm it.');
             return;
         }
 
         var contacts = this.getStore('Contacts');
         contacts.add(contact);
         contacts.sync();
+
+        var panel = this.lookupReference('displayPanel');
+        panel.getEl().mask('Connecting..');
+
+        var button = this.lookupReference('connectButton');
+        button.setText(CT.Consts.BUTTON_DISCONNECT_TEXT);
+
+    },
+
+    disconnect: function() {
+        var panel = this.lookupReference('displayPanel');
+        panel.getEl().unmask();
+
+        var button = this.lookupReference('connectButton');
+        button.setText(CT.Consts.BUTTON_CONNECT_TEXT);
+    },
+
+    isConnecting: function() {
+        var button = this.lookupReference('connectButton');
+        return button.getText() === CT.Consts.BUTTON_DISCONNECT_TEXT;
+    },
+
+    onConnectButtonClick: function(button, e, eOpts) {
+        var me = this;
+
+        if (me.isConnecting()) {
+            me.disconnect();
+        }
+        else {
+            me.connect();
+        }
 
     },
 
