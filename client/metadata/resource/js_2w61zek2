@@ -1,0 +1,16 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "defer": false,
+        "designer|userClassName": "js_2w61zek2",
+        "url": "resources/adapter.js",
+        "x-compile": true
+    },
+    "name": "js",
+    "designerId": "b7a59e81-2894-4b03-8a2d-2cc654b0715d"
+}

@@ -60,7 +60,9 @@ Ext.define('CT.view.WebRTC', {
         var me = this,
             video = me.el.down('video').dom;
 
-        video.src = URL.createObjectURL(stream);
+        attachMediaStream(video, stream);
+
+        // video.src = URL.createObjectURL(stream);
 
         setTimeout(function() {
             video.play();

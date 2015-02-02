@@ -1,5 +1,6 @@
-# SDK
+# lib
 client/ext
+server/node_modules
 
 # Architect
 client/.architect
