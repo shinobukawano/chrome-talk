@@ -9,6 +9,9 @@ client/.sencha
 # Build
 client/build
 
+# COnf
+client/app/util/Conf.js
+
 # Sass
 .sass-cache
 .sencha_backup

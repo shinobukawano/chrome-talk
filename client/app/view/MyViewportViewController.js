@@ -18,6 +18,7 @@ Ext.define('CT.view.MyViewportViewController', {
     alias: 'controller.myviewport',
 
     connect: function() {
+        var me = this;
         var contact = this.getViewModel().get('contact');
 
         var result = contact.validate();
@@ -38,6 +39,16 @@ Ext.define('CT.view.MyViewportViewController', {
 
         var button = this.lookupReference('connectButton');
         button.setText(CT.Consts.BUTTON_DISCONNECT_TEXT);
+
+        Ext.Ajax.request({
+            url: CT.Conf.SERVER_URL + '/connect',
+            success: function(res) {
+                console.log(res);
+            },
+            failure: function(res) {
+
+            }
+        });
 
     },
 

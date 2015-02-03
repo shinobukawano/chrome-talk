@@ -22,7 +22,8 @@ Ext.Loader.setConfig({
 Ext.application({
 
     requires: [
-        'CT.util.Consts'
+        'CT.util.Consts',
+        'CT.util.Conf'
     ],
     models: [
         'Contact'
