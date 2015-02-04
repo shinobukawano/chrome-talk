@@ -57,6 +57,14 @@ Ext.define('CT.view.WebRTC', {
     },
 
     onGetUserMedia: function(stream) {
+        this.attach(stream);
+    },
+
+    onFailureGetUserMedia: function(error) {
+        Ext.Msg.alert('error');
+    },
+
+    attach: function(stream) {
         var me = this,
             video = me.el.down('video').dom;
 
@@ -68,10 +76,17 @@ Ext.define('CT.view.WebRTC', {
             video.play();
         });
 
+
+        CT.localStream = stream;
+
     },
 
-    onFailureGetUserMedia: function(error) {
-        Ext.Msg.alert('error');
+    remove: function() {
+        var me = this,
+            video = me.el.down('video').dom;
+
+        video.src = '';
+
     }
 
 });

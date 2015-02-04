@@ -1,7 +1,7 @@
 {
    "name": "CT",
    "indexHtmlPath": "index.html",
-   "classpath": "${app.dir}/app,${app.dir}/resources/",
+   "classpath": "${app.dir}/app,${app.dir}/resources/js/",
    "overrides": "${app.dir}/overrides",
    "framework": "ext",
    "theme": "ext-theme-gray-144a3b60-4be1-4473-8dcb-7a705eb7e3df",
@@ -14,7 +14,11 @@
          "path": "${framework.dir}/build/ext-all-rtl-debug.js"
       },
       {
-         "path": "resources/adapter.js",
+         "path": "resources/js/adapter.js",
+         "x-compile": true
+      },
+      {
+         "path": "http://localhost:3000/socket.io/socket.io.js",
          "x-compile": true
       },
       {

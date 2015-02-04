@@ -50,17 +50,7 @@
                 ],
                 "fn": "onGetUserMedia",
                 "implHandler": [
-                    "var me = this,",
-                    "    video = me.el.down('video').dom;",
-                    "",
-                    "attachMediaStream(video, stream);",
-                    "",
-                    "// video.src = URL.createObjectURL(stream);",
-                    "",
-                    "setTimeout(function() {",
-                    "    video.play();",
-                    "});",
-                    ""
+                    "this.attach(stream);"
                 ]
             },
             "name": "onGetUserMedia",
@@ -116,6 +106,58 @@
             },
             "name": "onAfterRender",
             "designerId": "1fd94e75-f7a3-452e-ada8-c65c69bee244"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "stream"
+                ],
+                "fn": "attach",
+                "implHandler": [
+                    "var me = this,",
+                    "    video = me.el.down('video').dom;",
+                    "",
+                    "attachMediaStream(video, stream);",
+                    "",
+                    "// video.src = URL.createObjectURL(stream);",
+                    "",
+                    "setTimeout(function() {",
+                    "    video.play();",
+                    "});",
+                    "",
+                    "",
+                    "CT.localStream = stream;",
+                    ""
+                ]
+            },
+            "name": "attach",
+            "designerId": "bc67cc0f-29b2-4158-ba09-8125824804b1"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "remove",
+                "implHandler": [
+                    "var me = this,",
+                    "    video = me.el.down('video').dom;",
+                    "",
+                    "video.src = '';",
+                    ""
+                ]
+            },
+            "name": "remove",
+            "designerId": "179117c0-db03-4c69-9297-6e83665c786a"
         }
     ]
 }
