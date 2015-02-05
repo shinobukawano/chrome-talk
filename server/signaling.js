@@ -1,5 +1,6 @@
 var port = 3000;
 var io = require('socket.io').listen(port);
+
 console.log((new Date()) + " Server is listening on port " + port);
 
 io.sockets.on('connection', function(socket) {

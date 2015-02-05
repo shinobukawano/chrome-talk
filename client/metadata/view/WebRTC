@@ -9,9 +9,18 @@
         "designer|userAlias": "webrtc",
         "designer|userClassName": "WebRTC",
         "html": [
-            "<video style=\"height:100%\"></video>"
+            "<video id=\"localVideo\" style=\"height:100%\"></video>",
+            "<video id=\"remote\" style=\"height:100%\"></video>"
         ],
         "id": "video",
+        "mixins": [
+            "{",
+            "    webRTC: 'CT.util.WebRTC'",
+            "}"
+        ],
+        "requires": [
+            "CT.util.WebRTC"
+        ],
         "useAudio": true,
         "useVideo": true,
         "width": 150
@@ -37,44 +46,6 @@
     "viewControllerInstanceId": "a9533fbe-1ab1-482d-be3b-6d42189ea6bb",
     "viewModelInstanceId": "daf9cb3b-fd27-452f-a605-97459e016b72",
     "cn": [
-        {
-            "type": "basicfunction",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "designer|params": [
-                    "stream"
-                ],
-                "fn": "onGetUserMedia",
-                "implHandler": [
-                    "this.attach(stream);"
-                ]
-            },
-            "name": "onGetUserMedia",
-            "designerId": "40eb7a64-328f-4844-a646-694a3b7447bf"
-        },
-        {
-            "type": "basicfunction",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "designer|params": [
-                    "error"
-                ],
-                "fn": "onFailureGetUserMedia",
-                "implHandler": [
-                    "Ext.Msg.alert('error');"
-                ]
-            },
-            "name": "onFailureGetUserMedia",
-            "designerId": "b999eb77-7504-4efe-acd7-a714969bd0ee"
-        },
         {
             "type": "basiceventbinding",
             "reference": {
@@ -106,58 +77,6 @@
             },
             "name": "onAfterRender",
             "designerId": "1fd94e75-f7a3-452e-ada8-c65c69bee244"
-        },
-        {
-            "type": "basicfunction",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "designer|params": [
-                    "stream"
-                ],
-                "fn": "attach",
-                "implHandler": [
-                    "var me = this,",
-                    "    video = me.el.down('video').dom;",
-                    "",
-                    "attachMediaStream(video, stream);",
-                    "",
-                    "// video.src = URL.createObjectURL(stream);",
-                    "",
-                    "setTimeout(function() {",
-                    "    video.play();",
-                    "});",
-                    "",
-                    "",
-                    "CT.localStream = stream;",
-                    ""
-                ]
-            },
-            "name": "attach",
-            "designerId": "bc67cc0f-29b2-4158-ba09-8125824804b1"
-        },
-        {
-            "type": "basicfunction",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "fn": "remove",
-                "implHandler": [
-                    "var me = this,",
-                    "    video = me.el.down('video').dom;",
-                    "",
-                    "video.src = '';",
-                    ""
-                ]
-            },
-            "name": "remove",
-            "designerId": "179117c0-db03-4c69-9297-6e83665c786a"
         }
     ]
 }

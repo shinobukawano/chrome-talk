@@ -17,8 +17,12 @@ Ext.define('CT.view.WebRTC', {
     extend: 'Ext.Component',
     alias: 'widget.webrtc',
 
+    mixins: {
+        webRTC: 'CT.util.WebRTC'
+    },
     requires: [
-        'CT.view.WebRTCViewModel'
+        'CT.view.WebRTCViewModel',
+        'CT.util.WebRTC'
     ],
 
     config: {
@@ -29,7 +33,7 @@ Ext.define('CT.view.WebRTC', {
     viewModel: {
         type: 'webrtc'
     },
-    html: '<video style="height:100%"></video>',
+    html: '<video id="localVideo" style="height:100%"></video>\n<video id="remote" style="height:100%"></video>',
     id: 'video',
     width: 150,
     defaultListenerScope: true,
@@ -53,39 +57,6 @@ Ext.define('CT.view.WebRTC', {
             video: me.getUseVideo(),
             audio: me.getUseAudio()
         }, successFn, failureFn);
-
-    },
-
-    onGetUserMedia: function(stream) {
-        this.attach(stream);
-    },
-
-    onFailureGetUserMedia: function(error) {
-        Ext.Msg.alert('error');
-    },
-
-    attach: function(stream) {
-        var me = this,
-            video = me.el.down('video').dom;
-
-        attachMediaStream(video, stream);
-
-        // video.src = URL.createObjectURL(stream);
-
-        setTimeout(function() {
-            video.play();
-        });
-
-
-        CT.localStream = stream;
-
-    },
-
-    remove: function() {
-        var me = this,
-            video = me.el.down('video').dom;
-
-        video.src = '';
 
     }
 
