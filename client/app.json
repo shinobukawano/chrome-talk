@@ -14,10 +14,6 @@
          "path": "${framework.dir}/build/ext-all-rtl-debug.js"
       },
       {
-         "path": "resources/js/adapter.js",
-         "x-compile": true
-      },
-      {
          "path": "http://localhost:3000/socket.io/socket.io.js",
          "x-compile": true
       },
