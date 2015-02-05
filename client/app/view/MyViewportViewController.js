@@ -41,26 +41,22 @@ Ext.define('CT.view.MyViewportViewController', {
         button.setText(CT.Consts.BUTTON_DISCONNECT_TEXT);
 
         // WebRTC
+        var webRTC = this.lookupReference('webRTC');
 
-        if (!CT.peerStarted && CT.localStream) {
-            me.sendOffer();
-            CT.peerStarted = true;
-        } else {
-            alert("Local stream not running yet - try again.");
+        if (!webRTC.peerStarted && webRTC.localStream && webRTC.socketReady) {
+            webRTC.sendOffer();
+            webRTC.setCallback(function() {
+                me.disconnect();
+            });
+            webRTC.peerStarted = true;
         }
-
-
-        // Ext.Ajax.request({
-        //     url: CT.Conf.SERVER_URL + '/connect',
-        //     success: function(res) {
-        //         console.log(res);
-        //     },
-        //     failure: function(res) {
-        //         Ext.Msg.alert(CT.Consts.APP_TITLE, 'Error!', function() {
-        //             me.disconnect();
-        //         });
-        //     }
-        // });
+        else {
+            Ext.Msg.alert(CT.Consts.APP_TITLE,
+                          'Local stream not running yet. <br>' +
+                          'Try again.', function() {
+                              me.disconnect();
+                          });
+        }
 
     },
 
@@ -75,148 +71,6 @@ Ext.define('CT.view.MyViewportViewController', {
     isConnecting: function() {
         var button = this.lookupReference('connectButton');
         return button.getText() === CT.Consts.BUTTON_DISCONNECT_TEXT;
-    },
-
-    sendOffer: function() {
-        var me = this;
-        peerConnection = me.prepareNewConnection();
-
-        peerConnection.createOffer(function (sessionDescription) { // in case of success
-            peerConnection.setLocalDescription(sessionDescription);
-            console.log("Sending: SDP");
-            console.log(sessionDescription);
-            me.sendSDP(sessionDescription);
-        }, function () { // in case of error
-            console.log("Create Offer failed");
-        }, CT.mediaConstraints);
-
-    },
-
-    prepareNewConnection: function() {
-        var me = this;
-        var pc_config = {"iceServers":[]};
-        var peer = null;
-
-        try {
-            peer = new webkitRTCPeerConnection(pc_config);
-        } catch (e) {
-            console.log("Failed to create peerConnection, exception: " + e.message);
-        }
-
-        // send any ice candidates to the other peer
-        peer.onicecandidate = function (evt) {
-            if (evt.candidate) {
-                console.log(evt.candidate);
-                me.sendCandidate({type: "candidate",
-                               sdpMLineIndex: evt.candidate.sdpMLineIndex,
-                               sdpMid: evt.candidate.sdpMid,
-                               candidate: evt.candidate.candidate}
-                             );
-            } else {
-                console.log("End of candidates. ------------------- phase=" + evt.eventPhase);
-            }
-        };
-
-        console.log('Adding local stream...');
-        peer.addStream(CT.localStream);
-
-        peer.addEventListener("addstream", onRemoteStreamAdded, false);
-        peer.addEventListener("removestream", onRemoteStreamRemoved, false);
-
-        // when remote adds a stream, hand it on to the local video element
-        function onRemoteStreamAdded(event) {
-            console.log("Added remote stream");
-            // remoteVideo.src = window.webkitURL.createObjectURL(event.stream);
-
-            Ext.getCmp('webRTC').attach(stream);
-        }
-
-        // when remote removes a stream, remove it from the local video element
-        function onRemoteStreamRemoved(event) {
-            console.log("Remove remote stream");
-            // remoteVideo.src = "";
-            Ext.getCmp('webRTC').remove();
-        }
-
-        return peer;
-    },
-
-    sendCandidate: function(candidate) {
-        var CR = String.fromCharCode(13);
-
-        var text = JSON.stringify(candidate);
-        console.log("---sending candidate text ---");
-        console.log(text);
-
-        CT.textForSendICEvalue = (CT.textForSendICEvalue + CR + '------ ICE Candidate -------' + CR + text + CR);
-        // CT.textForSendICE.scrollTop = CT.textForSendICE.scrollHeight;
-
-    },
-
-    sendSDP: function(sdp) {
-        var text = JSON.stringify(sdp);
-        console.log("---sending sdp text ---");
-        console.log(text);
-
-        CT.textForSendSDPvalue = text;
-
-    },
-
-    onOffer: function(evt) {
-        var me = this;
-
-        console.log("Received offer...");
-        console.log(evt);
-        me.setOffer(evt);
-        me.sendAnswer(evt);
-
-    },
-
-    setOffer: function(evt) {
-        if (CT.peerConnection) {
-            console.error('peerConnection alreay exist!');
-        }
-        CT.peerConnection = prepareNewConnection();
-        CT.peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
-    },
-
-    sendAnswer: function(evt) {
-        var me = this;
-        console.log('sending Answer. Creating remote session description...' );
-        if (! CT.peerConnection) {
-            console.error('peerConnection NOT exist!');
-            return;
-        }
-
-        CT.peerConnection.createAnswer(function (sessionDescription) { // in case of success
-            peerConnection.setLocalDescription(sessionDescription);
-            console.log("Sending: SDP");
-            console.log(sessionDescription);
-            me.sendSDP(sessionDescription);
-        }, function () { // in case of error
-            console.log("Create Answer failed");
-        }, CT.mediaConstraints);
-
-    },
-
-    onAnswer: function(evt) {
-        console.log("Received Answer...")
-        console.log(evt);
-        this.setAnswer(evt);
-    },
-
-    setAnswer: function(evt) {
-        if (! peerConnection) {
-            console.error('peerConnection NOT exist!');
-            return;
-        }
-        CT.peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
-    },
-
-    stop: function() {
-        peerConnection.close();
-        peerConnection = null;
-        peerStarted = false;
     },
 
     onConnectButtonClick: function(button, e, eOpts) {
@@ -261,41 +115,8 @@ Ext.define('CT.view.MyViewportViewController', {
             contact: record
         });
 
-        CT.mediaConstraints = {
-            'mandatory': {
-                'OfferToReceiveAudio':true,
-                'OfferToReceiveVideo':true
-            }
-        };
-
-        var me = this;
-        var socket = io.connect(CT.util.Conf.SERVER_URL);
-
-        // socket: channel connected
-        socket.on('connect', onOpened)
-        .on('message', onMessage);
-
-        function onOpened(evt) {
-            console.log('socket opened.');
-            CT.socketReady = true;
-        }
-
-        // socket: accept connection request
-        function onMessage(evt) {
-            if (evt.type === 'offer') {
-                console.log("Received offer, set offer, sending answer....");
-                me.onOffer(evt);
-            } else if (evt.type === 'answer' && peerStarted) {
-                console.log('Received answer, settinng answer SDP');
-                me.onAnswer(evt);
-            } else if (evt.type === 'candidate' && peerStarted) {
-                console.log('Received ICE candidate...');
-                me.onCandidate(evt);
-            } else if (evt.type === 'user dissconnected' && peerStarted) {
-                console.log("disconnected");
-                me.stop();
-            }
-        }
+        var webRTC = this.lookupReference('webRTC');
+        webRTC.readySocket();
 
     }
 

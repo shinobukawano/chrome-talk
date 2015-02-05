@@ -53,7 +53,7 @@ Ext.define('CT.view.MyViewport', {
                     items: [
                         {
                             xtype: 'webrtc',
-                            id: 'webRTC'
+                            reference: 'webRTC'
                         }
                     ]
                 },
