@@ -8,7 +8,7 @@
     "userConfig": {
         "defer": false,
         "designer|userClassName": "js_8lslzeja",
-        "url": "http://localhost:3000/socket.io/socket.io.js",
+        "url": "resources/js/socket.io.js",
         "x-compile": true
     },
     "name": "js",

@@ -14,7 +14,7 @@
          "path": "${framework.dir}/build/ext-all-rtl-debug.js"
       },
       {
-         "path": "http://localhost:3000/socket.io/socket.io.js",
+         "path": "resources/js/socket.io.js",
          "x-compile": true
       },
       {
