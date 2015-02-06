@@ -9,8 +9,10 @@
         "designer|userAlias": "webrtc",
         "designer|userClassName": "WebRTC",
         "html": [
-            "<video id=\"localVideo\" style=\"height:100%\"></video>",
-            "<video id=\"remote\" style=\"height:100%\"></video>"
+            "<div style=\"width:100%; height:100%; display:flex;\">",
+            "    <video id=\"localVideo\" style=\"flex:1;\"></video>",
+            "    <video id=\"remoteVideo\" style=\"flex:1;\"></video>",
+            "</div>"
         ],
         "id": "video",
         "mixins": [

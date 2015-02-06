@@ -54,16 +54,18 @@ Ext.define('CT.util.WebRTC', {
     },
 
     onMessage: function (evt) {
+        var me = this;
+
         if (evt.type === 'offer') {
             console.log("Received offer, set offer, sending answer....");
             me.onOffer(evt);
-        } else if (evt.type === 'answer' && peerStarted) {
+        } else if (evt.type === 'answer' && me.peerStarted) {
             console.log('Received answer, settinng answer SDP');
             me.onAnswer(evt);
-        } else if (evt.type === 'candidate' && peerStarted) {
+        } else if (evt.type === 'candidate' && me.peerStarted) {
             console.log('Received ICE candidate...');
             me.onCandidate(evt);
-        } else if (evt.type === 'user dissconnected' && peerStarted) {
+        } else if (evt.type === 'user dissconnected' && me.peerStarted) {
             console.log("disconnected");
             me.stop();
         }
@@ -71,10 +73,10 @@ Ext.define('CT.util.WebRTC', {
 
     sendOffer: function () {
         var me = this;
-        peerConnection = me.prepareNewConnection();
+        me.peerConnection = me.prepareNewConnection();
 
-        peerConnection.createOffer(function (sessionDescription) { // in case of success
-            peerConnection.setLocalDescription(sessionDescription);
+        me.peerConnection.createOffer(function (sessionDescription) { // in case of success
+            me.peerConnection.setLocalDescription(sessionDescription);
             console.log("Sending: SDP");
             console.log(sessionDescription);
             me.sendSDP(sessionDescription);
@@ -125,16 +127,24 @@ Ext.define('CT.util.WebRTC', {
             console.log("Added remote stream");
             // remoteVideo.src = window.webkitURL.createObjectURL(event.stream);
 
-            var targetEl = this.el.down('video[id=remoteVideo]');
-            me.attach(stream, targetEl);
+            var targetEl = me.el.down('video[id=remoteVideo]');
+            me.attach(event.stream, targetEl);
+
+            if (Ext.isFunction(me.callback)) {
+                me.callback();
+            }
         }
 
         // when remote removes a stream, remove it from the local video element
         function onRemoteStreamRemoved(event) {
             console.log("Remove remote stream");
             // remoteVideo.src = "";
-            var targetEl = this.el.down('video[id=remoteVideo]');
+            var targetEl = me.el.down('video[id=remoteVideo]');
             me.remove(targetEl);
+
+            if (Ext.isFunction(me.callback)) {
+                me.callback();
+            }
         }
 
         return peer;
@@ -159,11 +169,11 @@ Ext.define('CT.util.WebRTC', {
         console.log(evt);
         me.setOffer(evt);
         me.sendAnswer(evt);
-        
+
         me.peerStarted = true;
     },
 
-    setOffer: function () {
+    setOffer: function (evt) {
         var me = this;
         if (me.peerConnection) {
             console.error('peerConnection alreay exist!');
@@ -181,7 +191,7 @@ Ext.define('CT.util.WebRTC', {
         }
 
         me.peerConnection.createAnswer(function (sessionDescription) { // in case of success
-            peerConnection.setLocalDescription(sessionDescription);
+            me.peerConnection.setLocalDescription(sessionDescription);
             console.log("Sending: SDP");
             console.log(sessionDescription);
             me.sendSDP(sessionDescription);
@@ -196,7 +206,9 @@ Ext.define('CT.util.WebRTC', {
         this.setAnswer(evt);
     },
 
-    setAnswer: function () {
+    setAnswer: function (evt) {
+        var me = this;
+
         if (!me.peerConnection) {
             console.error('peerConnection NOT exist!');
             return;
@@ -208,7 +220,7 @@ Ext.define('CT.util.WebRTC', {
         var me = this;
         var CR = String.fromCharCode(13);
         var text = JSON.stringify(candidate);
-        
+
         console.log("---sending candidate text ---");
         console.log(text);
 
@@ -229,12 +241,12 @@ Ext.define('CT.util.WebRTC', {
         console.log("Received Candidate...");
         console.log(candidate);
 
-        peerConnection.addIceCandidate(candidate);
+        this.peerConnection.addIceCandidate(candidate);
     },
-    
-    stop: function() {
+
+    stop: function () {
         var me = this;
-        
+
         me.peerConnection.close();
         me.peerConnection = null;
         me.peerStarted = false;

@@ -33,7 +33,7 @@ Ext.define('CT.view.WebRTC', {
     viewModel: {
         type: 'webrtc'
     },
-    html: '<video id="localVideo" style="height:100%"></video>\n<video id="remote" style="height:100%"></video>',
+    html: '<div style="width:100%; height:100%; display:flex;">\n    <video id="localVideo" style="flex:1;"></video>\n    <video id="remoteVideo" style="flex:1;"></video>\n</div>',
     id: 'video',
     width: 150,
     defaultListenerScope: true,
