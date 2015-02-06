@@ -156,8 +156,6 @@ Ext.define('CT.util.WebRTC', {
         console.log("---sending sdp text ---");
         console.log(text);
 
-        me.textForSendSDP = text;  // TODO
-
         // send via socket
         me.socket.json.send(sdp);
     },
@@ -223,9 +221,6 @@ Ext.define('CT.util.WebRTC', {
 
         console.log("---sending candidate text ---");
         console.log(text);
-
-        me.textForSendICE = (me.textForSendICE + CR + '------ ICE Candidate -------' + CR + text + CR);
-        // CT.textForSendICE.scrollTop = CT.textForSendICE.scrollHeight;
 
         // send via socket
         me.socket.json.send(candidate);
