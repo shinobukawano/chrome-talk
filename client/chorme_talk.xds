@@ -21,11 +21,15 @@
         "lineEnding": "LF",
         "genTimestamps": false,
         "cacheBust": false,
-        "buildShouldOverwriteIndex": true,
+        "buildShouldOverwriteIndex": false,
         "generateArchitectVersion": true,
         "projectHasEnabledWebServer": true,
         "lockUrlPrefix": true,
-        "installStatus": "Not Installed"
+        "installStatus": "Not Installed",
+        "lastBuildSelection": {
+            "value": "webBuild",
+            "display": "Build web app"
+        }
     },
     "xdsVersion": "3.2.0",
     "xdsBuild": 75,
@@ -49,8 +53,7 @@
         "resource": [
             "9b1e02e5-c7ce-4dba-a3e2-3e4dae8500ea",
             "144a3b60-4be1-4473-8dcb-7a705eb7e3df",
-            "90962d76-968c-4d88-a726-da8cf3c3d839",
-            "0295e71b-7657-478b-b4ea-cc2acd8368b7"
+            "90962d76-968c-4d88-a726-da8cf3c3d839"
         ],
         "app": [
             "application"

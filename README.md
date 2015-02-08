@@ -1,6 +1,6 @@
-# chrome-talk
+# CHROME TALK
 
-Simple video chat application for Google Chrome.
+Simple video chat application for Google Chrome. Powered by WebRTC and Sencha Ext JS.
 
 Feature
 =======
@@ -11,25 +11,6 @@ Installation
 =======
 
 [TODO]
-
-Debug
-=======
-
-* Server Side
-
-Install Node-Inspector:
-
-https://github.com/node-inspector/node-inspector
-
-Run application,
-
-$ node --debug bin/www and then start the node-debugger bin/www.
-
-and Node-Inspector.
-
-$ node-inspector
-
-Then, open the browser.
 
 Author
 =======
