@@ -9,15 +9,15 @@ Feature
 
 1. Get user media.
 
-<img src="a.png" width="30%"/>
+<img src="a.png" width="50%"/>
 
 2. Connect to another user (signaling by WebSocket).
 
-<img src="b.png" width="30%"/>
+<img src="b.png" width="50%"/>
 
 3. Let's talk!
 
-<img src="c.png" width="30%"/>
+<img src="c.png" width="50%"/>
 
 Installation
 =======
