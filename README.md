@@ -22,11 +22,11 @@ Feature
 Installation
 =======
 
-* Client Side
+**Client Side**
 
 Open chrome_talk.xds file with Sencha Architect, then save the project. The Sencha SDK is automatically prepared.
 
-* ServerSide
+**ServerSide**
 
 Move to `server` directory, then execute the following command.
 
