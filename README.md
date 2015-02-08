@@ -19,6 +19,11 @@ Feature
 
 <img src="c.png" width="50%"/>
 
+Demo
+=======
+
+- [CHROME TALK Demo](http://kawanoshinobu.github.io/chrome-talk/)
+
 Installation
 =======
 
@@ -26,7 +31,7 @@ Installation
 
 Open chrome_talk.xds file with Sencha Architect, then save the project. The Sencha SDK is automatically prepared.
 
-**ServerSide**
+**Server Side**
 
 Move to `server` directory, then execute the following command.
 
